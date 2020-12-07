@@ -19,7 +19,8 @@ code------------jenkins---compile--scan---package---reports(ws)----postbuild (qu
 
 
 
-pv
+pv- 
+created the volumes
 kind: persitencevolume
 
 storage : node /nfs/efs/ebs
