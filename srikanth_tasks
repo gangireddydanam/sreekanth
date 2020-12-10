@@ -1,12 +1,12 @@
 date: 07-12-2020
 ------------------------
 github--jenkins.sh,apache.sh,nginx.sh 
-jenkins
-sonarqube
+jenkins -- done
+sonarqube -- done (partially)
 report -sonarqube
 https://medium.com/@tarunprakash/quality-gates-a-must-have-thing-for-the-code-analysis-process-75b33d6b49dc
 
-gitlab--eks--gitlab pipeline
+gitlab--eks--gitlab pipeline : Gitlab and eks is ready.. and partially intigrated the k8 in to gitlab
 
 
 
