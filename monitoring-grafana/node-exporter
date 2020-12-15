@@ -1,0 +1,24 @@
+wget https://github.com/prometheus/node_exporter/releases/download/v1.0.1/node_exporter-1.0.1.linux-amd64.tar.gz
+  117  tar -xvzf node_exporter-1.0.1.linux-amd64.tar.gz 
+  118  ls -ltr
+  119  mv node_exporter-1.0.1.linux-amd64 nodeexporter
+  120  cd nodeexporter/
+  121  ls -ltr
+  122  pwd
+  123  cp node_exporter /bin
+  124  ls -ltr
+  125  pwd
+  126  ./node_exporter 
+  127  ./node_exporter  &
+  128  curl http://localhost:9100/metrics
+  129  netstat -anlp | grep "9100"
+  130  pwd
+  131  kill -9 4231
+  132  ./node_exporter  &
+  133  ps -ef | grep -i node
+  134  kill -9 8430
+  135  ./node_exporter  &
+  136  ps -ef | grep -i node
+  137  kill -9 8807
+  138  history
+[3]+  Killed    
