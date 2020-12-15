@@ -1,0 +1,255 @@
+1  cd /opt/
+    2  wget https://github.com/prometheus/prometheus/releases/download/v2.23.0/prometheus-2.23.0.windows-amd64.zip
+    3  unzip prometheus-2.23.0.windows-amd64.zip 
+    4  ls -ltr
+    5  rm -fr prometheus-2.23.0.windows-amd64
+    6  rm -fr prometheus-2.23.0.windows-amd64.zip 
+    7  wget https://github.com/prometheus/prometheus/releases/download/v2.23.0/prometheus-2.23.0.linux-amd64.tar.gz
+    8  tar -xvzf prometheus-2.23.0.linux-amd64.tar.gz 
+    9  ls -ltr
+   10  cd prometheus-2.23.0.linux-amd64/
+   11  ls -ltr
+   12  cd ..
+   13  ls -ltr
+   14  mv prometheus-2.23.0.linux-amd64 prometheus
+   15  ls -ltr
+   16  cd prometheus/
+   17  cd pro
+   18  ls -ltr
+   19  cp prometheus.yml prometheus.yml.backup
+   20  cd /opt/
+   21  ls -ltr
+   22  cd prometheus/
+   23  ls -ltr
+   24  vi prometheus.yml
+   25  sudo useradd --no-create-home --shell /bin/false prometheus
+   26  sudo mkdir /etc/prometheus
+   27  sudo mkdir /var/lib/prometheus
+   28  sudo chown prometheus:prometheus /etc/prometheus
+   29  sudo chown prometheus:prometheus /var/lib/prometheus
+   30  udo cp prometheus-files/prometheus /usr/local/bin/
+   31  sudo cp prometheus-files/promtool /usr/local/bin/
+   32  sudo chown prometheus:prometheus /usr/local/bin/prometheus
+   33  sudo chown prometheus:prometheus /usr/local/bin/promtool
+   34  ls -ltr
+   35  sudo cp prometheus /usr/local/bin/
+   36  sudo cp promtool /usr/local/bin/
+   37  sudo chown prometheus:prometheus /usr/local/bin/prometheus
+   38  sudo chown prometheus:prometheus /usr/local/bin/promtool
+   39  sudo cp -r consoles /etc/prometheus
+   40  sudo cp -r console_libraries /etc/prometheus
+   41  sudo chown -R prometheus:prometheus /etc/prometheus/consoles
+   42  sudo chown -R prometheus:prometheus /etc/prometheus/console_libraries
+   43  sudo vi /etc/systemd/system/prometheus.service
+   44  systemctl daemon-reload
+   45  systemctl start prometheus
+   46  systemctl status prometheus
+   47  cd /var/log/
+   48  ls -ltr
+   49  tail -500 messages
+   50  cd /etc/pro
+   51  cd /opt/
+   52  ls -ltr
+   53  cd prometheus/
+   54  ls -ltr
+   55  cp prometheus.yml /etc/prometheus/
+   56  cd /etc/prometheus/
+   57  ls -ltr
+   58  chown -R prometheus:prometheus prometheus.yml 
+   59  systemctl status prometheus
+   60  systemctl start prometheus
+   61  systemctl status prometheus
+   62  netstat -anlp |grep "9090"
+   63  netstat -anlp | grep -i "9090"
+   64  cd /tmp/
+   65  ls -ltr
+   66  exit
+   67  vi prometheus.yml 
+   68  vim prometheus.yml 
+   69  systemctl prometheus stop
+   70  systemctl stop prometheus
+   71  systemctl start prometheus
+   72  vi /etc/yum.repos.d/grafana.repo
+   73  yum update
+   74  yum install grafana
+   75  systemctl daemon-reload
+   76  systemctl start grafana-server
+   77  systemctl status grafana-server
+   78  netstat -anlp | grep "3000"
+   79  cd
+   80  cd /opt/
+   81  ls -ltr
+   82  wget https://github.com/prometheus/alertmanager/releases/download/v0.21.0/alertmanager-0.21.0.linux-amd64.tar.gz
+   83  tar -xvzf alertmanager-0.21.0.linux-amd64.tar.gz 
+   84  ls -ltr
+   85  mv alertmanager-0.21.0.linux-amd64 alertmanage
+   86  mv alertmanager
+   87  ls -ltr
+   88  mv alertmanage alertmanager
+   89  ls --ltr
+   90  cd alertmanager/
+   91  ls -ltr
+   92  mv alertmanager /usr/local/bin/
+   93  mkdir /etc/alertmanager/
+   94  vi /etc/alertmanager/alertmanager.yml
+   95  cp alertmanager.yml /etc/alertmanager/
+   96  cd /etc/alertmanager/
+   97  ls -ltr
+   98  cp alertmanager.yml alertmanager.yml.bkp
+   99  vi /etc/systemd/system/alertmanager.service
+  100  systemctl daemon-reload
+  101  systemctl start alertmanager
+  102  systemctl enable alertmanager
+  103  systemctl status alertmanager
+  104  cd /var/log/
+  105  ls -ltr
+  106  tail -500f messages
+  107  vi /etc/systemd/system/alertmanager.service
+  108  systemctl status alertmanager
+  109  systemctl start alertmanager
+  110  systemctl daemon-reload
+  111  systemctl start alertmanager
+  112  vi /etc/systemd/system/alertmanager.service
+  113  netstat -anlp | grep "9093"
+  114  systemctl status alertmanager
+  115  vi /etc/alertmanager/alertmanager.yml
+  116  vi /etc/systemd/system/alertmanager.service 
+  117  pwd
+  118  cd ..
+  119  ls -ltr
+  120  cd /opt/
+  121  ls -ltr
+  122  pwd
+  123  cd alertmanager/
+  124  ls -ltra
+  125  /usr/local/bin/alertmanager 
+  126  /usr/local/bin/alertmanager &
+  127  netstat -anlp | grep "9093"
+  128  grafana-cli plugins install camptocamp-prometheus-alertmanager-datasource
+  129  service grafana-server restart
+  130  cd /etc/prometheus/
+  131  ls -ltr
+  132  vi prometheus.yml 
+  133  pwd
+  134  vi alert.yml
+  135  promtool check rules alert.yml
+  136  pwd
+  137  cd /opt/
+  138  cd prometheus/
+  139  ls -ltt
+  140  cp promtool /usr/local/bin/
+  141  echo $PATH
+  142  cp promtool /bin
+  143  cd /etc/pro
+  144  cd /etc/prometheus/
+  145  promtool check rules alert.yml 
+  146  pwd
+  147  vi prometheus.yml 
+  148  cp prometheus.yml prometheus.yml.old
+  149  vim prometheus.yml
+  150  history | grep -i systemctl
+  151  ps -ef | grep -i alert
+  152  kill -9 9196
+  153  systemctl start alertmanager
+  154  cd /opt/alertmanager/
+  155  ls -ltr
+  156  cd /bin
+  157  ls -ltr
+  158  cd
+  159  cd /opt/
+  160  ls -ltr
+  161  cd alertmanager/
+  162  ls -ltr
+  163  pwd
+  164  pwd
+  165  /usr/local/bin/alertmanager 
+  166  /usr/local/bin/alertmanager  systemctl restart prometheus
+  167  systemctl restart prometheus
+  168  /usr/local/bin/alertmanager & 
+  169  systemctl status prometheus
+  170  systemctl status prometheus
+  171  cd /var/log/
+  172  ls -ltr
+  173  tail -500 messages
+  174  vi /etc/prometheus/prometheus.yml
+  175  vim /etc/prometheus/prometheus.yml
+  176  systemctl restart prometheus
+  177  systemctl status prometheus
+  178  tail -500 messages
+  179  vi /etc/prometheus/prometheus.yml
+  180  systemctl restart prometheus
+  181  systemctl status prometheus
+  182  tail -500 messages
+  183  vi /etc/prometheus/prometheus.yml
+  184  systemctl start prometheus
+  185  systemctl status prometheus
+  186  tail -500 messages
+  187  vi /etc/prometheus/prometheus.yml
+  188  systemctl start prometheus
+  189  systemctl status prometheus
+  190  tail -500 messages
+  191  systemctl status prometheus
+  192  vi /etc/prometheus/prometheus.yml
+  193  systemctl start prometheus
+  194  systemctl status prometheus
+  195  tail -500 messages
+  196  vi /etc/prometheus/prometheus.yml
+  197  systemctl start prometheus
+  198  systemctl status prometheus
+  199  tail -500 messages
+  200  cd /etc/alertmanager/
+  201  ls -ltr
+  202  vi alertmanager.yml
+  203  vi /etc/prometheus/prometheus.yml
+  204  systemctl start prometheus
+  205  systemctl status prometheus
+  206  ps -ef | grep -i alert
+  207  kill -9 9560
+  208  ps -ef | grep -i alert
+  209  /usr/local/bin/alertmanager &
+  210  /usr/local/bin/alertmanager &
+  211  cd /var/log/
+  212  ls -ltr
+  213  tail -500f messages
+  214  cp /usr/local/bin/alertmanager /bin/
+  215  alertmanager -h
+  216  ls -ltr /etc/alertmanager/alertmanager.yml
+  217  alertmanager --config.file=/etc/alertmanager/alertmanager.yml
+  218  vi /etc/alertmanager/alertmanager.yml
+  219  alertmanager --config.file=/etc/alertmanager/alertmanager.yml
+  220  vi /etc/alertmanager/alertmanager.yml
+  221  alertmanager --config.file=/etc/alertmanager/alertmanager.yml
+  222  vi /etc/alertmanager/alertmanager.yml
+  223  alertmanager --config.file=/etc/alertmanager/alertmanager.yml
+  224  alertmanager --config.file=/etc/alertmanager/alertmanager.yml &
+  225  ps -ef | grep -i alert
+  226  more /etc/alertmanager/alertmanager.yml
+  227  cd /etc/alertmanager/
+  228  ls -ltr
+  229  cd data/
+  230  ls -ltr
+  231  more silences 
+  232  more nflog 
+  233  cd /var/log/
+  234  ls -ltr
+  235  tail -500 messages
+  236  vi /etc/prometheus/prometheus.yml
+  237  service prometheus restart
+  238  history | grep -i pro
+  239  systemctl restart prometheus
+  240  systemctl status prometheus
+  241  pwd
+  242  tail -f messages
+  243  tail -f messages
+  244  pwd
+  245  cd /etc/prometheus/
+  246  ls -ltr
+  247  cat prometheus.yml
+  248  pwd
+  249  ls -ltr
+  250  more alert.yml 
+  251  cd /etc/alertmanager/
+  252  ls -ltr
+  253  more alertmanager.yml
+  254  history
+[root@ip-10-0-1-250 alertmanager]# 
