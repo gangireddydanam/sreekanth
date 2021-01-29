@@ -1,0 +1,247 @@
+ 833  yum install -y yum-utils device-mapper-persistent-data lvm2
+  834  yum-config-manager --add-repo   https://download.docker.com/linux/centos/docker-ce.repo
+  835  yum update -y && yum install -y   containerd.io-1.2.13   docker-ce-19.03.11   docker-ce-cli-19.03.11
+  836  yum install https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-19.03.11-3.el7.x86_64.rpm
+  837  cd /etc/yum.repos.d/
+  838  ls -ltr
+  839  yum update
+  840  more docker-ce.repo 
+  841  ls -ltr
+  842  rm -f docker-ce.repo 
+  843  yum-config-manager     --add-repo     https://download.docker.com/linux/centos/docker-ce.repo
+  844   yum install docker-ce docker-ce-cli containerd.io
+  845  yum-config-manager --enable REPOSITORY
+  846   yum install docker-ce docker-ce-cli containerd.io
+  847  ls -ltr
+  848  rm -f docker-ce.repo 
+  849  grep -i docker
+  850  grep -i docker *
+  851  grep -iR docker *
+  852  rpm -ivh 
+  853  wget https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-19.03.11-3.el7.x86_64.rpm
+  854  rpm -ivh docker-ce-19.03.11-3.el7.x86_64.rpm 
+  855  yum update
+  856   yum install -y yum-utils device-mapper-persistent-data lvm2
+  857  yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  858  yum update
+  859  yum install docker
+  860  yum remove docker
+  861  yum list docker-ce --showduplicates | sort –r
+  862  yum list docker-ce --showduplicates | sort -r
+  863  yum install docker-ce-*19.03.11-3*
+  864  vi test.sh
+  865  sh test.sh 
+  866  sh test.sh vi test.sh 
+  867  vi test.sh 
+  868  sh test.sh 
+  869  dng
+  870  dnf
+  871  yum install dnf
+  872  sh test.sh 
+  873  docker
+  874  docker -version
+  875  docker version
+  876  yum remove docker
+  877  yum install docker-ce-*18*
+  878  arch
+  879  history
+  880  yum-config-manager --setopt="docker-ce-stable.baseurl=https://download.docker.com/linux/centos/7/x86_64/stable" --save
+  881  yum install docker-ce-*18*
+  882  rpm -qa | grep -i docker
+  883  yum remove docker-*
+  884  yum remove docker docker-common docker-selinux docker-engine 
+  885  yum install docker-ce-*18*
+  886  history
+  887  systemctl start docker
+  888  docker version
+  889  mkdir /etc/docker
+  890  cat > /etc/docker/daemon.json <<EOF
+  891  {
+  892    "exec-opts": ["native.cgroupdriver=systemd"],
+  893    "log-driver": "json-file",
+  894    "log-opts": {
+  895      "max-size": "100m"
+  896    },
+  897    "storage-driver": "overlay2",
+  898    "storage-opts": [
+  899      "overlay2.override_kernel_check=true"
+  900    ]
+  901  }
+  902  EOF
+  903  mkdir -p /etc/systemd/system/docker.service.d
+  904  systemctl daemon-reload
+  905  systemctl restart docker
+  906  systemctl enable docker
+  907  modprobe overlay
+  908  modprobe br_netfilter
+  909  # Set up required sysctl params, these persist across reboots.
+  910  cat > /etc/sysctl.d/99-kubernetes-cri.conf <<EOF
+  911  net.bridge.bridge-nf-call-iptables  = 1
+  912  net.ipv4.ip_forward                 = 1
+  913  net.bridge.bridge-nf-call-ip6tables = 1
+  914  EOF
+  915  sysctl --system
+  916  cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+  917  net.bridge.bridge-nf-call-ip6tables = 1
+  918  net.bridge.bridge-nf-call-iptables = 1
+  919  EOF
+  920  sudo sysctl --system
+  921  ls -l /var/run/dockercat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+  922  [kubernetes]
+  923  name=Kubernetes
+  924  baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+  925  enabled=1
+  926  gpgcheck=1
+  927  repo_gpgcheck=1
+  928  gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+  929  exclude=kubelet kubeadm kubectl
+  930  EOF
+  931  cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+  932  [kubernetes]
+  933  name=Kubernetes
+  934  baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+  935  enabled=1
+  936  gpgcheck=1
+  937  repo_gpgcheck=1
+  938  gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+  939  exclude=kubelet kubeadm kubectl
+  940  EOF
+  941  sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+  942  sudo systemctl enable --now kubelet
+  943  yum remove kube*
+  944  yum remove kubernetes-client-*
+  945  sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+  946  sudo systemctl enable --now kubelet
+  947  kubeadm 
+  948  kubeadm init --ignore-preflight-errors
+  949  kubeadm init --ignore-preflight-errors all
+  950  rm -fr /etc/kubernetes/
+  951  kubeadm init --ignore-preflight-errors all
+  952  swapff -a
+  953  swapoff -a
+  954  kubeadm init --ignore-preflight-errors all
+  955  cd /etc/kubernetes/
+  956  ls -ltr
+  957  export KUBECONFIG=/etc/admin.conf
+  958  kubectl get nodes
+  959  more admin.conf 
+  960   docke rps
+  961  docker ps
+  962  systemctl status kubelet
+  963  more /etc/kubernetes/kubelet.conf 
+  964   cd /var/lib/kubelet/
+  965  ls -ltr
+  966  more config.yaml 
+  967  kubeadm init --ignore-preflight-errors=all
+  968  hostname
+  969  nslookup v-USP-Platform.persistent.co.in
+  970  curl https://10.44.234.5:6443
+  971  kubectl get pods --all-namespaces
+  972  kubectl get nodes
+  973  cd /var/log/
+  974  ls -ltr
+  975  cd containers/
+  976  ls -ltr
+  977  cd 
+  978  ls -ltr
+  979  cd /var/log/
+  980  ls -ltr
+  981  tail -f messages
+  982  hostname
+  983  ifconfig
+  984  vi /etc/hosts
+  985  tail -f messages
+  986  less /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+  987  cd /etc/systemd/system/kubelet.service.d/
+  988  ls -ltr
+  989  less /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+  990  cd /etc/systemd/system
+  991  ls -ltr
+  992  ps -ef | grep -i kube
+  993  ps -ef | grep -i kubelet
+  994  systemctl status kubelet
+  995  more /etc/kubernetes/
+  996  ls -ltr
+  997  more kubelet.service.d/10-kubeadm.conf 
+  998  cd /var/lib/
+  999  ls -ltr
+ 1000  ls -ld minikube/
+ 1001  rm -fr minikube/
+ 1002  cd
+ 1003  systemctl restart docker
+ 1004  cd /etc/kubernetes/
+ 1005  ls -ltr
+ 1006  more kubelet.conf 
+ 1007  kubeadm init --ignore-preflight-errors=all
+ 1008  minikube delete
+ 1009   minikube delete
+ 1010  docker stop (docker ps -aq)
+ 1011  rm -r ~/.kube ~/.minikube
+ 1012   minikube delete
+ 1013  docker stop (docker ps -aq)
+ 1014  rm -rf ~/.kube ~/.minikube
+ 1015  sudo rm -f /usr/local/bin/localkube /usr/local/bin/minikube
+ 1016  systemctl stop '*kubelet*.mount'
+ 1017  sudo rm -rf /etc/kubernetes/
+ 1018  docker system prune -af --volumes
+ 1019  sudo rm -rf /etc/kubernetes/
+ 1020  docker system prune -af --volumes
+ 1021  systemctl stop '*kubelet*.mount'
+ 1022  pwd
+ 1023  ls -ltr
+ 1024  cd ..
+ 1025  ls -ltr
+ 1026  cd /var/lib/kubelet/
+ 1027  ls -lr
+ 1028  cd
+ 1029  docker ps
+ 1030  kubeadm init --ignore-preflight-errors=all
+ 1031  systemctl status kubelet
+ 1032  kubeadm reset
+ 1033  rm -fr .kube
+ 1034  yum remove kubeadm kubectl kubelet kubernetes-cni kube*
+ 1035  yum autoremove
+ 1036  rm -rf ~/.kube
+ 1037  systemctl stop docker
+ 1038  rm -rf /etc/cni /etc/kubernetes /var/lib/dockershim /var/lib/etcd /var/lib/kubelet /var/run/kubernetes ~/.kube/*
+ 1039  systemctl start docker
+ 1040  docker version
+ 1041  kubeadm init --ignore-preflight-errors=all
+ 1042  history | grep -i yum
+ 1043  yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+ 1044  systemctl enable --now kubelet
+ 1045  systemctl status kubelet
+ 1046  minikube delete
+ 1047  which minikube
+ 1048  ls -l /usr/bin/minikube 
+ 1049  rm -fr /usr/bin/minikube 
+ 1050  cd /usr/lib/systemd/system
+ 1051  more kubelet.service
+ 1052  systemctl stop kubelet
+ 1053  ps -ef | grep -i kube
+ 1054  systemctl start kubelet
+ 1055  yum autoremove
+ 1056  yum remove kubeadm kubectl kubelet kubernetes-cni kube*
+ 1057  rm -fr /etc/kubernetes/*
+ 1058  find / -name kube*
+ 1059  rm -fr /etc/systemd/system/kubelet.service.d/
+ 1060  rm -f /usr/lib/systemd/system/kubelet.service.d/
+ 1061  rm -fr /usr/lib/systemd/system/kubelet.service.d/
+ 1062  yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+ 1063  systemctl start kubelet
+ 1064  systemctl daemon-reload
+ 1065  systemctl status kubelet
+ 1066  systemctl systemctl enable --now kubelet
+ 1067  systemctl enable --now kubelet
+ 1068  systemctl status docker
+ 1069  systemctl restart docker
+ 1070  systemctl restart kubelet
+ 1071  systemctl status docker
+ 1072  systemctl status kubelet
+ 1073  kubeadm init --ignore-preflight-errors=all
+ 1074  mkdir -p $HOME/.kube
+ 1075   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+ 1076   sudo chown $(id -u):$(id -g) $HOME/.kube/config
+ 1077  kubectl get nodes
+ 1078  kubectl get po --all-namespaces
+ 1079  kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
